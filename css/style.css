@@ -1,0 +1,67 @@
+@import url('./fonts.css');
+@import url('./navbar.css');
+
+body {
+    background-color: #EFEBCE;
+    margin: 0;
+    padding: 0;
+}
+
+
+h1 {
+    color: #003049;
+    text-align: center;
+    font-size: 50px;
+    font-family: afacad-bold;
+    margin:0;
+    padding:15px;
+    background-color: s#E3DDB1;
+}
+h2 {
+    color: #c0bdb3;
+    text-align: left;
+    font-size: 40px;
+    font-family: afacad-semi;
+    margin-left: 30px;
+    margin-bottom:0px;
+}
+
+p {
+    font-family: barlow;
+    font-size: 20px;
+    margin:0px;
+    padding:20px;
+}
+
+.info{
+    color:#7D8597;
+    font-family:barlow;
+    margin:0;
+    padding:0;
+}
+.draggable {
+    width: 100px;
+    height: 50px;
+    background-color: lightblue;
+    margin: 10px;
+    cursor: grab;
+    text-align: center;
+    line-height: 50px;
+}
+
+#game-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+#blocks, #drop-zone {
+    width: 200px;
+    min-height: 200px;
+    padding: 10px;
+    border: 2px #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
