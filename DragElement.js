@@ -3,8 +3,8 @@ export class DragElement{
         this.e = element;
         this.offsetX = 0;
         this.offsetY = 0;
-        this.curX = 0;
-        this.curY = 0;
+        this.curX = this.e.offsetLeft;
+        this.curY = this.e.offsetTop;
         this.startDrag = this.startDrag.bind(this);
         this.drag = this.drag.bind(this);
         this.stopDrag = this.stopDrag.bind(this);
@@ -13,8 +13,12 @@ export class DragElement{
         this.dropZone = dropZone;
     }
     startDrag(event) {
+        this.curX = this.e.offsetLeft;
+        this.curY = this.e.offsetTop;
         event.preventDefault();
         this.e.style.position = "absolute";
+        this.e.style.top = this.curY + "px";
+        this.e.style.left = this.curX + "px";
         this.curX = event.clientX;
         this.curY = event.clientY;
         document.addEventListener("mouseup", this.stopDrag);
