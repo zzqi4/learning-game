@@ -1,70 +1,78 @@
-export class DragElement{
-    constructor(element, dropZone, blockZone){
-        this.e = element;
+export class DragElements{
+    constructor(dropZones, blockZone){
+        this.curElement = null;
         this.offsetX = 0;
         this.offsetY = 0;
-        this.curX = this.e.offsetLeft;
-        this.curY = this.e.offsetTop;
         this.startDrag = this.startDrag.bind(this);
         this.drag = this.drag.bind(this);
         this.stopDrag = this.stopDrag.bind(this);
-        this.e.addEventListener("mousedown", this.startDrag);
         this.blockZone = blockZone;
-        this.dropZone = dropZone;
+        this.blockZone.addEventListener("mousedown", this.startDrag);
+        this.dropZones = dropZones;
+        this.usedDropZones = [];
     }
     startDrag(event) {
-        this.curX = this.e.offsetLeft;
-        this.curY = this.e.offsetTop;
         event.preventDefault();
-        this.e.style.position = "absolute";
-        this.e.style.top = this.curY + "px";
-        this.e.style.left = this.curX + "px";
-        this.curX = event.clientX;
-        this.curY = event.clientY;
+        if (!event.target.classList.contains("draggable")) return;
+        this.curElement = event.target;
+        this.offsetX = event.clientX - this.curElement.offsetLeft;
+        this.offsetY = event.clientY - this.curElement.offsetTop;
+
+        const y = this.curElement.offsetTop;
+        const x = this.curElement.offsetLeft;
+        this.curElement.style.position = "absolute";
+        this.curElement.style.top = y + "px";
+        this.curElement.style.left = x + "px";   
         document.addEventListener("mouseup", this.stopDrag);
         document.addEventListener("mousemove", this.drag);
         
     }
     
     drag(event) {
-        console.log("dragging");
         event.preventDefault();
-        this.offsetX = event.clientX-this.curX;
-        this.offsetY = event.clientY-this.curY;
-        this.e.style.top = (this.e.offsetTop + this.offsetY) + "px";
-        this.e.style.left = (this.e.offsetLeft + this.offsetX) +"px";
-    
-        this.curX = event.clientX;
-        this.curY = event.clientY;
+        this.curElement.style.top = (event.clientY - this.offsetY) + "px";
+        this.curElement.style.left = (event.clientX - this.offsetX)+ "px";  
     }
     
     stopDrag(event) {
-        console.log("a")
         document.removeEventListener("mouseup", this.stopDrag);
         document.removeEventListener("mousemove", this.drag);
-        if (this.inDropZone()) {
-            console.log("hi")
-            this.dropZone.appendChild(this.e);
-            this.e.style.position = "relative";
-            this.e.style.top = "0px"; 
-            this.e.style.left = "0px"; 
-            console.log(`${this.e.innerText} added to drop zone`);
-        }
-        else{
-            this.blockZone.appendChild(this.e);
-            this.e.style.position = "relative";
-            this.e.style.top = "0px"; 
-            this.e.style.left = "0px"; 
+        const dropZonei = this.inDropZone();
+        console.log(dropZonei);
+        if (dropZonei > -1) {
+            this.dropZones[dropZonei].appendChild(this.curElement);
+            this.curElement.style.position = "relative";
+            this.curElement.style.top = "0px"; 
+            this.curElement.style.left = "0px"; 
+            this.playDropAnimation();
+            this.usedDropZones[dropZonei] = true;
+            this.curElement = null;
+            return;
+            
+        }else{
+            this.blockZone.appendChild(this.curElement);
+            this.curElement.style.position = "relative";
+            this.curElement.style.top = "0px"; 
+            this.curElement.style.left = "0px"; 
+            this.curElement = null;
         }
     }
     
     inDropZone() {
-        const blockRect = this.e.getBoundingClientRect();
-        const dropRect = this.dropZone.getBoundingClientRect();
-    
-        return (
-            blockRect.right >= dropRect.left &&
-            blockRect.bottom >= dropRect.top 
-        );
+        for (let i = 0; i < this.dropZones.length; i++) {
+            if (this.usedDropZones[i]) continue;
+            const blockRect = this.curElement.getBoundingClientRect();
+            const dropRect = this.dropZones[i].getBoundingClientRect();
+            console.log(blockRect);
+            console.log(dropRect);
+            if ((blockRect.right >= dropRect.left && blockRect.bottom >= dropRect.top) && (blockRect.left <= dropRect.right && blockRect.top <= dropRect.bottom)){
+                return i;
+            }
+        }
+        return -1;
+        
+    }
+    playDropAnimation() {
+        this.curElement.style.animation = "bob 0.5s ease-in-out";
     }
 }

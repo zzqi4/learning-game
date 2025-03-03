@@ -1,8 +1,7 @@
-import { DragElement } from "./DragElement.js";
+import { DragElements } from "./DragElement.js";
 
 const draggables = document.querySelectorAll('.draggable');
-const dropZone = document.getElementById('drop-zone');
+const dropZones = document.querySelectorAll('.drop-zone');
 const blockZone = document.getElementById('blocks');
 
-
-draggables.forEach(draggable => {new DragElement(draggable, dropZone, blockZone)});
+draggables.forEach(draggable => {new DragElements(dropZones, blockZone)});
