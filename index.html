@@ -8,7 +8,7 @@
 </head>
 <body>
     <nav>
-        <a class = "navtitle"><span style = "color: var(--orange-dark)">LEARNING </span> <span style = "color: var(--orange-light)">GAME</span> </a>
+        <a class = "navtitle"> <span style = "color: var(--orange-dark)">  LEARNING </span> <span style = "color: var(--orange-light)">GAME</span> </a>
 
         <a href="#about" class = "navbar"><span>About</span></a>
         <a href="#game" class = "navbar"><span>Game</span></a>
@@ -22,7 +22,7 @@
         <h2>INFO</h2>
         <p>    info </p>
     </div>
-    <div id="game-container">
+    <div class="game-container" id="dragging-game">
         <div id="blocks">
             <div class="draggable">a</div>
             <div class="draggable">b</div>
@@ -32,7 +32,11 @@
         <div class="drop-zone"></div>
         <div class="drop-zone"></div>
     </div>
-    <script src="script.js" type="module"></script>
-    
+    <script src="dragGame.js" type="module"></script>
+
+    <div class="game-container">
+        <canvas id = "click-canvas" width = "1920" height = "1080"></canvas>
+    </div>
+    <script src="countGame.js" type="module"></script>
 </body>
 </html>

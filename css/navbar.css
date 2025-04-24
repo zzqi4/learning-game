@@ -12,6 +12,7 @@ nav {
     flex-direction:row;
     align-items:center;
     height: 60px;
+    z-index:3
 }
 nav a.navbar {
     display: flex;
@@ -34,7 +35,7 @@ nav a.navbar::before {
     height: 100%;
     background-color: var(--dark-beige);
     transition: left 0.5s ease-in-out;
-    z-index:0;
+    z-index:2;
 }
 
 nav a.navbar:hover::before {
@@ -42,13 +43,13 @@ nav a.navbar:hover::before {
 }
 nav a.navbar span{
     position:relative;
-    z-index:1;
+    z-index:3;
 }
 nav a.navtitle{
     color:#E3DDB1;
     font-family:afacad-bold;
     font-size:40px;
-    padding:10px;
+    padding:30px;
     margin:0;
     margin-right: auto;
 }
