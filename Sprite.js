@@ -1,4 +1,4 @@
-import {Vector2} from "./Vector2.js";
+import {Vector2} from "./utils/Vector2.js";
 //import {GameObject} from "./GameObject.js";
 
 export class Sprite {
@@ -10,7 +10,6 @@ export class Sprite {
       frame,
       scale,
       position,
-      animations,
     }) {
 
     this.resource = resource;
@@ -21,7 +20,6 @@ export class Sprite {
     this.frameMap = new Map();
     this.scale = scale ?? 1;
     this.position = position ?? new Vector2(0,0);
-    this.animations = animations ?? null;
     this.buildFrameMap();
   }
 
@@ -36,14 +34,6 @@ export class Sprite {
         frameCount++;
       }
     }
-  }
-
-  step(delta) {
-    if (!this.animations) {
-      return;
-    }
-    this.animations.step(delta);
-    this.frame = this.animations.frame;
   }
 
   drawImage(ctx, x, y) {

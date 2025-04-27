@@ -1,20 +1,14 @@
-import { Vector2 } from "./Vector2";
-
-export const LEFT = "LEFT"
-export const RIGHT = "RIGHT"
-export const UP = "UP"
-export const DOWN = "DOWN"
-
 export class Input {
   constructor(canvas) {
 
-    this.heldDirections = [];
+    this.spacesHeld = 0;
     this.spacePressed = false;
-    canvas.addEventListener("click", (e) => {
-        const click = new Vector2(e.clientX, e.clientY);
-    });
+
     document.addEventListener("keydown", (e) => {
       if (e.code === "Space") {
+        if (!this.spacePressed) {
+          this.spacesHeld +=1;
+        }
         this.spacePressed = true;
       }
     })
@@ -27,9 +21,12 @@ export class Input {
   }
 
   get coord() {
-    return click;
+    return this.click;
   }
-  get space() {
-    return this.spacePressed;
+  get spaces() {
+    return this.spacesHeld;
+  }
+  set spaces(value) {
+    this.spacesHeld = value; // Encapsulate modification logic if needed
   }
 }

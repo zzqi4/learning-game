@@ -2,7 +2,9 @@ class Resources {
     constructor() {
       this.toLoad = {
         bread: "assests/bread.png",
+        breadslice: "assests/breadslice.png",
         cookies: "assests/cookies.png",
+        checkerboard: "assests/checkerboard.png",
       }
       
       this.images = {};
