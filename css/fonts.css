@@ -14,3 +14,11 @@
     font-family: barlow-semi;
     src: url(fonts/Barlow-SemiBold.ttf);
 }
+@font-face {
+    font-family: quantico-regular;
+    src: url(fonts/Quantico-Regular.ttf);
+}
+@font-face {
+    font-family: youngserif;
+    src: url(fonts/YoungSerif-Regular.ttf);
+}

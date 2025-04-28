@@ -5,6 +5,7 @@ class Resources {
         breadslice: "assests/breadslice.png",
         cookies: "assests/cookies.png",
         checkerboard: "assests/checkerboard.png",
+        frame: "assests/frame.png",
       }
       
       this.images = {};

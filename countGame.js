@@ -7,22 +7,26 @@ import { ClickInput } from "./ClickInput.js";
 import {Formatter} from "./utils/formatter.js";
 import { Rectangle } from "./utils/Rectangle.js";
 
+
 const canvas = document.querySelector("#click-canvas");
 const ctx = canvas.getContext("2d");
 const input = new Input(canvas);
-const clickerInput = new ClickInput(new Rectangle(new Vector2(50, 160), new Vector2(50 + 500, 160 + 450)));
+const clickerInput = new ClickInput(new Rectangle(new Vector2(20, 350), new Vector2(20 + 500*0.8, 350 + 450*0.8)));
+const backInput = new ClickInput(new Rectangle(new Vector2(550, 20), new Vector2(1280, 720)));
 const numTotal = 7;
 const slicesScale = 0.3 ;
 var numClicked = 0;
+const numCorrect = 3;
 var format = new Formatter(new Rectangle(new Vector2(500, 20), new Vector2(1280, 720)), 3, 3);
 var coordinates = format.getCoordinates();
+const spriteScale = 0.8;
 const clicker = new Sprite({
     resource: resources.images.bread, 
     frameSize: new Vector2(500,450),
     hFrames: 3,
     vFrames:3,
     frame:0,
-    scale:0.7
+    scale:spriteScale
 });
 
 const draw = () => {
@@ -32,24 +36,64 @@ const draw = () => {
     if (bg.isLoaded) {
         ctx.drawImage(bg.image, 0, 0, 1280,720);
     }
-    ctx.imageSmoothingEnabled = false;
+
+    const frame =resources.images.frame;
+    if (frame.isLoaded) {
+        ctx.drawImage(frame.image, 0, 20, 460, 225);
+    }
+
+
     const breadSlice =  resources.images.breadslice
-    clicker.drawImage(ctx, 50, 160);
+    clicker.drawImage(ctx, 20, 350);
     for (let i = 0; i < numClicked; i++) {
         ctx.drawImage(breadSlice.image, coordinates[i].x, coordinates[i].y, breadSlice.image.width *slicesScale, breadSlice.image.height *slicesScale);
     }
-    
+    ctx.font         = '35px youngserif';
+    ctx.fillStyle = 'rgb(250, 241, 227)';
+    ctx.textAlign = 'center';
+
+    ctx.fillText  ('Can I have', 210, 80);
+    ctx.font         = '55px youngserif';
+    ctx.fillStyle = 'rgb(240, 216, 177)';
+    ctx.fillText  (numCorrect, 210, 130);
+    ctx.font         = '35px youngserif';
+    ctx.fillStyle = 'rgb(250, 241, 227)';
+    ctx.fillText  ('slices of bread?', 210, 195);
 }
+let scaleFactor = 1; // Initial scale factor
+let scalingDirection = 0; // 0 = no scaling, 1 = shrinking, 2 = growing
 
 const update = () => {
     if (clickerInput.clicks>0 && numClicked < numTotal) {
-        clicker.frame = clicker.frame + 1;
-        console.log(clicker.frame);
-        input.spaces = input.spaces - 1;
-        console.log(input.spaces);
+        clicker.frame +=1;
+        clickerInput.clicks -= 1;
         numClicked += 1;
+        scalingDirection = -1; 
     }
 
+    if (scalingDirection === -1) {
+        scaleFactor -= 0.03;
+        if (scaleFactor <= 0.999) { 
+            scalingDirection = 1;
+        }
+    } else if (scalingDirection === 1) {
+        scaleFactor += 0.03;
+        if (scaleFactor >= 1) {
+            scaleFactor = 1;
+            scalingDirection = 0;
+        }
+    }
+
+    if (backInput.clicks>0 && numClicked > 0) {
+        clicker.frame -=1;
+        backInput.clicks -= 1;
+        numClicked -= 1;
+    }
+    console.log(numClicked);
+
+    // Update the sprite's scale
+    clicker.scale = scaleFactor*spriteScale;
+    backInput.rectangle = new Rectangle(new Vector2(550, 20), new Vector2(1280, 240*Math.ceil(numClicked/3)));
 }
 
 const gameLoop = new GameLoop(update, draw);

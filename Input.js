@@ -1,6 +1,5 @@
 export class Input {
   constructor(canvas) {
-
     this.spacesHeld = 0;
     this.spacePressed = false;
 
@@ -27,6 +26,6 @@ export class Input {
     return this.spacesHeld;
   }
   set spaces(value) {
-    this.spacesHeld = value; // Encapsulate modification logic if needed
+    this.spacesHeld = value;
   }
 }

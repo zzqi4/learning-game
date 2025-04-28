@@ -1,16 +1,24 @@
 import { Vector2 } from "./utils/Vector2.js";
 import { Rectangle } from "./utils/Rectangle.js";
-export class ClickInput{
-    contructor(canvas, rect){
-        canvas.log("hi")
+export class ClickInput {
+    constructor(rect) {
         this.rect = rect;
-        canvas.addEventListener("click", (e) => {
-            click = new Vector2(e.clientX, e.clientY);
+        this.clicksMade = 0;
+        document.addEventListener("click", (e) => {
+            const click = new Vector2(e.offsetX, e.offsetY);
             if (this.rect.includes(click)) {
-                console.log("Click inside rectangle at: ", click.x, click.y);
-            } else {
-                console.log("Click outside rectangle at: ", click.x, click.y);
+                this.clicksMade +=1;
             }
+            
         });
+    }
+    get clicks() {
+        return this.clicksMade;
+    }
+    set clicks(value) {
+        this.clicksMade = value;
+    }
+    set rectangle(value) {
+        this.rect = value;
     }
 }
