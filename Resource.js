@@ -6,6 +6,7 @@ class Resources {
         cookies: "assests/cookies.png",
         checkerboard: "assests/checkerboard.png",
         frame: "assests/frame.png",
+        done: "assests/done.png",
       }
       
       this.images = {};

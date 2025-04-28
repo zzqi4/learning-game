@@ -13,6 +13,7 @@ const ctx = canvas.getContext("2d");
 const input = new Input(canvas);
 const clickerInput = new ClickInput(new Rectangle(new Vector2(20, 350), new Vector2(20 + 500*0.8, 350 + 450*0.8)));
 const backInput = new ClickInput(new Rectangle(new Vector2(550, 20), new Vector2(1280, 720)));
+const doneInput = new ClickInput(new Rectangle(new Vector2(70, 240), new Vector2(70+280, 240+110)));
 const numTotal = 7;
 const slicesScale = 0.3 ;
 var numClicked = 0;
@@ -20,6 +21,8 @@ const numCorrect = 3;
 var format = new Formatter(new Rectangle(new Vector2(500, 20), new Vector2(1280, 720)), 3, 3);
 var coordinates = format.getCoordinates();
 const spriteScale = 0.8;
+var scaleDone = 1;
+var scalingDirectionDone = 0; // -1, 0, 1
 const clicker = new Sprite({
     resource: resources.images.bread, 
     frameSize: new Vector2(500,450),
@@ -40,6 +43,11 @@ const draw = () => {
     const frame =resources.images.frame;
     if (frame.isLoaded) {
         ctx.drawImage(frame.image, 0, 20, 460, 225);
+    }
+
+    const doneButton =resources.images.done;
+    if (doneButton.isLoaded) {
+        ctx.drawImage(doneButton.image, 70+100*(1-scaleDone), 240, 280*scaleDone, 110*scaleDone);
     }
 
 
@@ -91,6 +99,28 @@ const update = () => {
     }
     console.log(numClicked);
 
+    if (doneInput.clicks>0) {
+        doneInput.clicks -= 1;
+        if (numClicked === numCorrect) {
+            //TODO: add a function to go to the next level
+        }
+        else{
+            scalingDirectionDone = -1;
+        }
+    }
+    if (scalingDirectionDone === -1) {
+        scaleDone -= 0.01;
+        if (scaleDone <= 0.97) { 
+            scalingDirectionDone = 1;
+        }
+        console.log(scaleDone);
+    } else if (scalingDirectionDone === 1) {
+        scaleDone += 0.01;
+        if (scaleDone >= 1) {
+            scaleDone = 1;
+            scalingDirectionDone = 0;
+        }
+    }
     // Update the sprite's scale
     clicker.scale = scaleFactor*spriteScale;
     backInput.rectangle = new Rectangle(new Vector2(550, 20), new Vector2(1280, 240*Math.ceil(numClicked/3)));
