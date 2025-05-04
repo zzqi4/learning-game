@@ -17,4 +17,7 @@ export class Rectangle {
         return point.x >= this.topLeft.x && point.x <= this.bottomRight.x &&
                point.y >= this.topLeft.y && point.y <= this.bottomRight.y;
     }
+    // get topLeft() {
+    //     return this.topLeft;
+    // }
 } 

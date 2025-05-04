@@ -4,6 +4,7 @@ class Resources {
         bread: "assests/bread.png",
         breadslice: "assests/breadslice.png",
         cookies: "assests/cookies.png",
+        cookie: "assests/cookie.png",
         checkerboard: "assests/checkerboard.png",
         frame: "assests/frame.png",
         done: "assests/done.png",
@@ -24,6 +25,6 @@ class Resources {
           }
       })
     }
-  }
+}
   
-  export const resources = new Resources();
+export const resources = new Resources();
