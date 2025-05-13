@@ -1,12 +1,12 @@
-import { Sprite } from "./Sprite.js";
-import { resources } from "./Resource.js";
-import { GameLoop } from "./GameLoop.js";
-import { Vector2 } from "./utils/Vector2.js";
-import { Input } from "./Input.js";
+import { Sprite } from "../Sprite.js";
+import { resources } from "../Resource.js";
+import { GameLoop } from "../utils/GameLoop.js";
+import { Vector2 } from "../utils/Vector2.js";
+import { Input } from "../Input.js";
 import { ClickInput } from "./ClickInput.js";
-import { Rectangle } from "./utils/Rectangle.js";
-import { AnimateButton } from "./AnimateButton.js";
-import { AnimateSprite } from "./AnimateButton.js";
+import { Rectangle } from "../utils/Rectangle.js";
+import { AnimateButton } from "../AnimateButton.js";
+import { AnimateSprite } from "../AnimateButton.js";
 import {clickerLevels} from "./ClickerLevels.js";
 
 const canvas = document.querySelector("#click-canvas");

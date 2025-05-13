@@ -1,5 +1,5 @@
-import { Vector2 } from "./utils/Vector2.js";
-import { Rectangle } from "./utils/Rectangle.js";
+import { Vector2 } from "../utils/Vector2.js";
+import { Rectangle } from "../utils/Rectangle.js";
 export class ClickInput {
     constructor(rect) {
         this.rect = rect;

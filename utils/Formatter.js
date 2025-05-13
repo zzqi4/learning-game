@@ -14,3 +14,13 @@ export function formatter(numV, numH, rect){
     }
     return coordinates;
 }
+
+export function grid(numV, numH, width, topLeft){
+    const coordinates = [];
+    for(let i = 0; i < numV; i++){
+        for(let j = 0; j < numH; j++){
+            coordinates.push(new Vector2(topLeft.x + j*width, topLeft.y + i*width));
+        }
+    }
+    return coordinates;
+}

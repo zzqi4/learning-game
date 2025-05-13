@@ -8,6 +8,8 @@ class Resources {
         checkerboard: "assests/checkerboard.png",
         frame: "assests/frame.png",
         done: "assests/done.png",
+        pretzelH: "assests/pretzelH.png",
+        pretzelV: "assests/pretzelV.png",
       }
       
       this.images = {};

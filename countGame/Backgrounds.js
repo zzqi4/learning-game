@@ -1,6 +1,6 @@
-import {AnimateButton} from "./AnimateButton.js"
-import {resources} from "./Resource.js"
-import {Vector2} from "./utils/Vector2.js"
+import {AnimateButton} from "../AnimateButton.js"
+import {resources} from "../Resource.js"
+import {Vector2} from "../utils/Vector2.js"
 
 export const backgrounds = (ctx) => {
     return {
