@@ -1,5 +1,7 @@
 import { Vector2 } from './Vector2.js';
 export class Rectangle {
+    topLeft;
+    bottomRight;
     constructor(topLeft, bottomRight) {
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
@@ -17,7 +19,4 @@ export class Rectangle {
         return point.x >= this.topLeft.x && point.x <= this.bottomRight.x &&
                point.y >= this.topLeft.y && point.y <= this.bottomRight.y;
     }
-    // get topLeft() {
-    //     return this.topLeft;
-    // }
 } 
