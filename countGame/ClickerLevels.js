@@ -3,7 +3,7 @@ import {AnimateSprite} from "../AnimateButton.js";
 import {Sprite} from "../Sprite.js";
 import {resources} from "../Resource.js";
 import {Vector2} from "../utils/Vector2.js";
-import {formatter} from "../utils/formatter.js";
+import {formatter} from "../utils/Formatter.js";
 import {Rectangle} from "../utils/Rectangle.js";
 export const clickerLevels = (ctx) => {
     return {

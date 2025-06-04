@@ -1,5 +1,5 @@
-import { grid } from "../utils/formatter.js";
-import { tGrid } from "../utils/formatter.js";
+import { grid } from "../utils/Formatter.js";
+import { tGrid } from "../utils/Formatter.js";
 import { Vector2 } from "../utils/Vector2.js";
 export class Grid {
     numV;
