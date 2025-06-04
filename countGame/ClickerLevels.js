@@ -1,4 +1,4 @@
-import {backgrounds} from "./Backgrounds.js";
+import {backgrounds} from "../Backgrounds.js";
 import {AnimateSprite} from "../AnimateButton.js";
 import {Sprite} from "../Sprite.js";
 import {resources} from "../Resource.js";
@@ -21,7 +21,7 @@ export const clickerLevels = (ctx) => {
             clickerOut: resources.images.breadslice.image,
             maxnumClicked: 7,
             coordinates: formatter(3,3,new Rectangle(new Vector2(500, 20), new Vector2(1280, 720))),
-            textFunction: backgrounds(ctx).cafe.textFunction('slices of bread?')
+            textFunction: backgrounds(ctx).cafe.textFunction('Can I have', 'slices of bread?')
         },
         cookies:{
             background: backgrounds(ctx).cafe,
@@ -36,7 +36,7 @@ export const clickerLevels = (ctx) => {
             clickerOut: resources.images.cookie.image,
             maxnumClicked: 6,
             coordinates: formatter(3,3,new Rectangle(new Vector2(500, 20), new Vector2(1280, 720))),
-            textFunction: backgrounds(ctx).cafe.textFunction('cookies?')
+            textFunction: backgrounds(ctx).cafe.textFunction('Can I have', 'cookies?')
         }
     }
 }

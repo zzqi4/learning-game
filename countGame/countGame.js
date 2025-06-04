@@ -3,7 +3,7 @@ import { resources } from "../Resource.js";
 import { GameLoop } from "../utils/GameLoop.js";
 import { Vector2 } from "../utils/Vector2.js";
 import { Input } from "../Input.js";
-import { ClickInput } from "./ClickInput.js";
+import { ClickInput } from "../ClickInput.js";
 import { Rectangle } from "../utils/Rectangle.js";
 import { AnimateButton } from "../AnimateButton.js";
 import { AnimateSprite } from "../AnimateButton.js";

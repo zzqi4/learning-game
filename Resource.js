@@ -8,8 +8,11 @@ class Resources {
         checkerboard: "assests/checkerboard.png",
         frame: "assests/frame.png",
         done: "assests/done.png",
-        pretzelH: "assests/pretzelH.png",
-        pretzelV: "assests/pretzelV.png",
+        pretzelH: "assests/pretzel/pretzelH.png",
+        pretzelV: "assests/pretzel/pretzelV.png",
+        pretzelL: "assests/pretzel/pretzelL.png",
+        pretzelR: "assests/pretzel/pretzelR.png",
+        square: "assests/square.png",
       }
       
       this.images = {};

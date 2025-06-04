@@ -1,15 +1,14 @@
-import { Vector2 } from "../utils/Vector2.js";
-import { Rectangle } from "../utils/Rectangle.js";
-import {grid} from "../utils/formatter.js";
-export class GridInput {
-    constructor(numV, numH, topLeft, tolerance = 5) {
+import { Vector2 } from "./utils/Vector2.js";
+import { Rectangle } from "./utils/Rectangle.js";
+export class ClickInput {
+    constructor(rect) {
         this.rect = rect;
-        this.numV = numV;
-        this.numH = numH;
-        this.coordinates = [];
+        this.clicksMade = 0;
         document.addEventListener("click", (e) => {
             const click = new Vector2(e.offsetX, e.offsetY);
-            
+            if (this.rect.includes(click)) {
+                this.clicksMade +=1;
+            }
             
         });
     }
