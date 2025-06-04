@@ -6,7 +6,7 @@ export class Grid {
     numH;
     width;
     coordinates;
-    constructor(numH, numV, topLeft, vertical, horizontal, tolerance = 20) {
+    constructor(numH, numV, topLeft, vertical, horizontal, tolerance = 30) {
         this.numV = numV;
         this.numH = numH;
         this.width = 190;
@@ -73,11 +73,10 @@ export class TGrid{
     N;
     width;
     coordinates;
-    constructor(N, top, left, right, horizontal, tolerance = 30) {
+    constructor(N, top, left, right, horizontal, tolerance = 20) {
         this.N = N;
         this.width = 190;
         this.coordinates = tGrid(N, this.width, top);
-        console.log(this.coordinates);
         this.current = [Array(N*(N+1)/2).fill(true), Array(N*(N+1)/2).fill(true), Array(N*(N+1)/2).fill(true)]; //L, R, H
         this.left = left;
         this.right = right;
@@ -93,25 +92,30 @@ export class TGrid{
             return;
         }
 
-        const row = Math.floor(click.y / (this.width* Math.sqrt(3)/2 + this.tolerance/2));
+        const row = Math.floor(click.y / (this.width* Math.sqrt(3)/2));
         const col = Math.floor(click.x /(this.width/2));
-        const start = (row+1) * (row) / 2;
+        let start = (row) * (row-1) / 2;
 
-        let x = click.x - (this.N-row-1)*(this.width/2);
-        if (Math.abs(click.y-((row+1)*this.width* Math.sqrt(3)/2)) < this.tolerance && x%this.width < (this.width-this.tolerance/4) && x%this.width > this.tolerance/4) {
-            const e = Math.floor(x / this.width)
-            if (e<row+1 && e>=0){
+        let x = click.x - (this.N-row)*(this.width/2);
+        console.log((row)*(this.width* Math.sqrt(3)/2));
+        console.log(click.y);
+        const diff = click.y-(row)*(this.width* Math.sqrt(3)/2);
+        if (diff>0 &&diff < this.tolerance && x%this.width < (this.width-this.tolerance/4) && x%this.width > this.tolerance/4) {
+            const e = Math.floor(x / this.width);
+            if (e<row && e>=0){
                 this.current[2][start + e] = !this.current[2][start + e]; 
             }
             return;
         }
-
-        let colstart = this.N-row-1;
-        console.log(row);
-        if ((col - colstart) %2 ==0){
-            this.current[0][start + (col - colstart)/2] = !this.current[0][start + (col - colstart)/2];
-        }else if ((col - colstart) %2 ==1){
-            this.current[1][start + (col - colstart-1)/2] = !this.current[1][start + (col - colstart-1)/2];
+        //TODO:follow the line instead of col
+        start = (row+1) * (row) / 2;
+        const colstart = this.N-row-1;
+        if (col>=colstart && col-colstart < (row+1)*2) {
+            if ((col - colstart) %2 ==0){
+                this.current[0][start + (col - colstart)/2] = !this.current[0][start + (col - colstart)/2];
+            }else if ((col - colstart) %2 ==1){
+                this.current[1][start + (col - colstart-1)/2] = !this.current[1][start + (col - colstart-1)/2];
+            }
         }
         // if (this.distToLine(click, v.left, Math.sqrt(3)) < t && click.x >= v.left.x - t && click.x <= v.top.x + t) {
         //     const e = Math.floor()

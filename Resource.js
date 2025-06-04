@@ -13,6 +13,8 @@ class Resources {
         pretzelL: "assests/pretzel/pretzelL.png",
         pretzelR: "assests/pretzel/pretzelR.png",
         square: "assests/square.png",
+        triangle: "assests/triangle.png",
+        rhombus: "assests/rhombus.png"
       }
       
       this.images = {};

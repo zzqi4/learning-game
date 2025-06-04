@@ -11,8 +11,8 @@ const ctx = canvas.getContext("2d");
 
 const doneInput = new ClickInput(new Rectangle(new Vector2(60, 240), new Vector2(60+280, 240+110)));
 
-const levels = ["a", "b"];
-let curLevel = stickLevels(ctx)[levels[1]];
+const levels = ["a", "b", "c"];
+let curLevel = stickLevels(ctx)[levels[2]];
 let curNum = 0;
 let doneButton = curLevel.background.done;
 let grid = curLevel.grid;
@@ -30,7 +30,7 @@ const draw = () => {
     doneButton.draw();
 
     grid.draw(ctx);
-    curLevel.textFunction(ctx, curLevel.puzzles[curNum][0],curLevel.puzzles[curNum][1]);
+    curLevel.textFunction(ctx, curLevel.puzzles[curNum][0],curLevel.puzzles[curNum][1], curLevel.puzzles[curNum][2]);
 }
 
 const update = () => {
