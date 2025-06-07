@@ -12,10 +12,14 @@ const ctx = canvas.getContext("2d");
 const doneInput = new ClickInput(new Rectangle(new Vector2(60, 240), new Vector2(60+280, 240+110)));
 
 const levels = ["a", "b", "c"];
-let curLevel = stickLevels(ctx)[levels[2]];
+let curLevel = stickLevels(ctx)[levels[0]];
 let curNum = 0;
 let doneButton = curLevel.background.done;
 let grid = curLevel.grid;
+let doneL = [];
+for (let i = 0; i < levels.length; i++) {
+    doneL.push(Array(stickLevels(ctx)[levels[i]].puzzles.length).fill(false));
+}
 const draw = () => {
     const bg =curLevel.background.background;
     if (bg.isLoaded) {
@@ -53,20 +57,38 @@ const update = () => {
                 }
             }
             if (done) {
-                const level = levels[Math.floor(Math.random()*levels.length)]
+                if (isFull(doneL)){
+                    alert("You have completed all levels!");
+                    return;
+                }
+                let a = Math.floor(Math.random()*levels.length);
+                let b = Math.floor(Math.random()*stickLevels(ctx)[levels[a]].puzzles.length);
+                while (doneL[a][b]) {
+                    a = Math.floor(Math.random()*levels.length);
+                    b = Math.floor(Math.random()*stickLevels(ctx)[levels[a]].puzzles.length);
+                }
+                const level = levels[a]
                 curLevel = stickLevels(ctx)[level];
 
                 doneButton = curLevel.background.done;
                 grid = curLevel.grid;
-                console.log(curLevel.puzzles.length);
-                curNum = Math.floor(Math.random()*curLevel.puzzles.length);
-                console.log(curNum);
+                curNum = b;
+                doneL[a][b] = true;
                 break;
             }
         }
     }
     doneButton.update();
 }
-
+function isFull(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr[i].length; j++) {
+            if (!arr[i][j]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
 const gameLoop = new GameLoop(update, draw);
 gameLoop.start();
